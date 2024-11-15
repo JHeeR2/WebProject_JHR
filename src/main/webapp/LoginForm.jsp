@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="space-theme.css">
+    <script src="stars.js"></script>
 </head>
 <body>
     <div class="space-background"></div>
@@ -24,7 +25,7 @@
             </div>
             <button type="submit" class="button">로그인</button>
             <div class="register-link">
-                <a href="register.html">아직 계정이 없으신가요?</a>
+                <a href="Register.jsp">아직 계정이 없으신가요?</a>
             </div>
         </form>
     </div>
@@ -45,20 +46,6 @@
             return true;
         }
 
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = `${Math.random() * 3}px`;
-                star.style.height = star.style.width;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                starsContainer.appendChild(star);
-            }
-        }
-        createStars();
     </script>
 </body>
 </html>
