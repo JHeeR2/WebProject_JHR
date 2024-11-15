@@ -145,6 +145,82 @@ input, select {
 }
 
 .register-link a .login-link a:hover {
+    width: 300px;
+    padding: 20px;
+    background-color: rgba(26, 35, 126, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 176, 255, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+h2 {
+    text-align: center;
+    color: var(--space-accent);
+    text-shadow: 0 0 10px rgba(0, 176, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: var(--space-accent);
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--space-white);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: var(--space-accent);
+    color: var(--space-black);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: var(--space-white);
+    color: var(--space-accent);
+}
+
+.register-link, .login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link {
+    font-size: 0.9em;
+}
+
+.login-link a {
+    color: var(--space-accent);
+    text-decoration: none;
+}
+
+.login-link a:hover {
     text-decoration: underline;
 }
 

@@ -1,6 +1,7 @@
 package users;
 
 public class UserDTO {
+
 	private String id;
 	private String pass;
 	private String name;
