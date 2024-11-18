@@ -7,7 +7,7 @@ public class UserDTO {
 	private String name;
 	private String email;
 	private String nickname;
-	private java.sql.Date birthday;
+	private String birthday;
 	private String gender;
 	private java.sql.Date regidate;
 	public String getId() {
@@ -40,10 +40,10 @@ public class UserDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public java.sql.Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(java.sql.Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getGender() {
@@ -58,5 +58,7 @@ public class UserDTO {
 	public void setRegidate(java.sql.Date regidate) {
 		this.regidate = regidate;
 	}
+
+	
 
 }
