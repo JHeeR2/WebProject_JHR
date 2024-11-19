@@ -12,7 +12,7 @@ import users.UserDAO;
 import users.UserDTO;
 
 @WebServlet("/user/login.do")
-public class LoginServlet extends HttpServlet {
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override

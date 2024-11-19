@@ -36,61 +36,19 @@ public class UserDAO extends DBConnPool {
 		return applyResult;
 	}
 	
-	// 회원 가입 과정 중 아이디 중복 검사
-	public boolean checkIdDuplicate(String userId) {
-		String query = "Select count (*) from users where id = ?";
-		try (PreparedStatement psmt = con.prepareStatement(query)) {
-			psmt.setString(1, userId);
-			try (ResultSet rs = psmt.executeQuery()) {
-				if (rs.next()) {
-					// 중복된 아이디 존재, true 반환
-					return rs.getInt(1) > 0;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
+	// 회원 가입 과정 중 아이디, 이메일, 닉네임  중복 검사
+	public boolean checkDuplicate(String column, String value) {
+	    String query = "SELECT COUNT(*) FROM users WHERE " + column + " = ?";
+	    try (PreparedStatement psmt = con.prepareStatement(query)) {
+	        psmt.setString(1, value);
+	        try (ResultSet rs = psmt.executeQuery()) {
+	            return rs.next() && rs.getInt(1) > 0;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
 	}
-
-	// 회원 가입 과정 중 이메일 중복 검사
-	public boolean checkEmailDuplicate(String userEmail) {
-		String query = "Select count (*) from users where email = ?";
-		try (PreparedStatement psmt = con.prepareStatement(query)) {
-			psmt.setString(1, userEmail);
-			try (ResultSet rs = psmt.executeQuery()) {
-				if (rs.next()) {
-					// 중복된 이메일 존재, true 반환
-					return rs.getInt(1) > 0;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-
-	// 회원 가입 과정 중 닉네임 중복 검사
-	public boolean checkNicknameDuplicate(String userNickname) {
-		String query = "Select count (*) from users where nickname = ?";
-		try (PreparedStatement psmt = con.prepareStatement(query)) {
-			psmt.setString(1, userNickname);
-			rs = psmt.executeQuery();
-			if (rs.next()) {
-				// 중복된 닉네임 존재, true 반환
-				return rs.getInt(1) > 0;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-	
-	
 	
 	//로그인 기능
 	public UserDTO getUser(String uid, String upass) {

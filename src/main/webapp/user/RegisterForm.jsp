@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" href="../css/space-theme.css">
+    <script src="../js/stars.js"></script>
     <style>
         .container {
             width: 500px;
@@ -74,6 +75,16 @@
             font-size: 0.8em;
             white-space: nowrap;
         }
+		.input-wrapper {
+		    display: flex;
+		    flex-direction: column;
+		    gap: 5px;
+		}
+		
+		.message-container {
+		    font-size: 0.9em;
+		    min-height: 20px; /* 메시지가 없을 때도 공간 유지 */
+		}
     </style>
 </head>
 <body>
@@ -92,14 +103,18 @@
                 <tr>
                     <td>아이디 <span class="required-asterisk">*</span></td>
                     <td>
-                        <div class="input-group">
-                            <input type="text" id="id" name="user_id" placeholder="아이디" required>
-                        </div>
+                    	<div class="input-wrapper">
+            				<div class="input-group">
+                				<input type="text" id="user_id" name="user_id" placeholder="아이디" required>
+                				<button type="button" id="IdCheckButton" class="check-button" onclick="checkDuplicate('id')" disabled>중복확인</button>
+            				</div>
+            				<div class="message-container"></div>
+        				</div>
                     </td>
                 </tr>
                 <tr>
                     <td>비밀번호 <span class="required-asterisk">*</span></td>
-                    <td><input type="password" id="password" name="user_pw" placeholder="비밀번호" required></td>
+                    <td><input type="password" id="user_pw" name="user_pw" placeholder="비밀번호" required></td>
                 </tr>
                 <tr>
                     <td>비밀번호 확인 <span class="required-asterisk">*</span></td>
@@ -108,21 +123,30 @@
                 <tr>
                     <td>이름 <span class="required-asterisk">*</span></td>
                     <td><input type="text" id="name" name="user_name" placeholder="이름" required></td>
+                    
                 </tr>
                 <tr>
                     <td>이메일 <span class="required-asterisk">*</span></td>
                     <td>
-                        <div class="input-group">
-                            <input type="email" id="email" name="user_email" placeholder="이메일" required>
-                        </div>
+						<div class="input-wrapper">
+            				<div class="input-group">
+                				<input type="email" id="user_email" name="user_email" placeholder="이메일" required>
+                				<button type="button" id="EmailCheckButton" class="check-button" onclick="checkDuplicate('email')" disabled>중복확인</button>
+            				</div>
+            				<div class="message-container"></div>
+        				</div>
                     </td>
                 </tr>
                 <tr>
                     <td>닉네임 <span class="required-asterisk">*</span></td>
                     <td>
-                        <div class="input-group">
-                            <input type="text" id="nickname" name="user_nick" placeholder="닉네임" required>
-                        </div>
+						<div class="input-wrapper">
+            				<div class="input-group">
+                				<input type="text" id="user_nick" name="user_nick" placeholder="닉네임" required>
+                				<button type="button" id="NickCheckButton" class="check-button" onclick="checkDuplicate('nick')" disabled>중복확인</button>
+            				</div>
+            				<div class="message-container"></div>
+        				</div>
                     </td>
                 </tr>
                 <tr>
@@ -148,19 +172,202 @@
             </div>
         </form>
     </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// 실시간 아이디 검증 코드
+$(document).ready(function () {
+    const userIdInput = $('#user_id');
 
-    <script src="../js/stars.js"></script>
-    <script>
-        function validateForm(form) {
-            if (form.password.value !== form.confirmPassword.value) {
-                alert("비밀번호가 일치하지 않습니다.");
-                form.confirmPassword.focus();
-                return false;
-            } 
-            return true;
+    userIdInput.on('input', function () {
+        const userId = $(this).val();
+        const messageContainer = $(this).closest('.input-wrapper').find('.message-container');
+        messageContainer.empty(); // 이전 메시지 제거
+
+        // 한글, 특수문자 확인 정규식
+        const koreanOrSpecialCharRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]|[^a-zA-Z0-9]/;
+
+        if (koreanOrSpecialCharRegex.test(userId)) {
+            messageContainer.html('<span style="color: red;">아이디에 한글 또는 특수문자를 사용할 수 없습니다.</span>');
+            $('#IdCheckButton').prop('disabled', true); // 버튼 비활성화
+        } else if (userId.length < 5) {
+            messageContainer.html('<span style="color: red;">아이디는 최소 5자 이상이어야 합니다.</span>');
+            $('#IdCheckButton').prop('disabled', true); // 버튼 비활성화
+        } else {
+            messageContainer.html('<span style="color: red;">사용 가능한 형식의 아이디이나, 중복확인이 되지 않았습니다.</span>');
+            $('#IdCheckButton').prop('disabled', false); // 버튼 활성화
+        }
+    });
+});
+
+//실시간 이메일 검증 코드
+$(document).ready(function () {
+    const userEmailInput = $('#user_email');
+
+    userEmailInput.on('input', function () {
+        const userEmail = $(this).val();
+        const messageContainer = $(this).closest('.input-wrapper').find('.message-container');
+        messageContainer.empty(); // 이전 메시지 제거
+
+        // 이메일 형식 검증 정규식
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(userEmail)) {
+            messageContainer.html('<span style="color: red;">이메일 형식이 올바르지 않습니다.</span>');
+            $('#EmailCheckButton').prop('disabled', true); // 버튼 비활성화
+        } else {
+            messageContainer.html('<span style="color: red;">사용 가능한 형식의 이메일이나, 중복확인이 되지 않았습니다.</span>');
+            $('#EmailCheckButton').prop('disabled', false); // 버튼 활성화
+        }
+    });
+});
+
+//실시간 닉네임 검증 코드
+$(document).ready(function () {
+    const userNickInput = $('#user_nick');
+
+    userNickInput.on('input', function () {
+        const userNick = $(this).val();
+        const messageContainer = $(this).closest('.input-wrapper').find('.message-container');
+        messageContainer.empty(); // 이전 메시지 제거
+
+        const nickRegex = /^[^<>'";\-#&/\\%=.:?~]+$/;
+
+        if (userNick.trim() === '') {
+            messageContainer.html('<span style="color: red;">닉네임을 입력해 주세요.</span>');
+            $('#NickCheckButton').prop('disabled', true); // 버튼 비활성화
+        }
+        else if (!nickRegex.test(userNick)) {
+            messageContainer.html('<span style="color: red;">허용되지 않은 특수문자가 사용되었습니다.</span>');
+            $('#NickCheckButton').prop('disabled', true); // 버튼 비활성화
+        } else {
+            messageContainer.empty(); // 메시지 초기화
+            $('#NickCheckButton').prop('disabled', false); // 버튼 활성화
+        }
+    });
+});
+
+
+function checkDuplicate(type) {
+    let value, inputField, column;
+
+    switch (type) {
+        case 'id':
+            value = $('#user_id').val();
+            inputField = $('#user_id');
+            column = "id";
+            break;
+        case 'email':
+            value = $('#user_email').val();
+            inputField = $('#user_email');
+            column = "email";
+            break;
+        case 'nick':
+            value = $('#user_nick').val();
+            inputField = $('#user_nick');
+            column = "nickname";
+            break;
+        default:
+            return;
+    }
+
+    // 아이디 형식 추가 검증
+    if (type === 'id') {
+        const koreanOrSpecialCharRegex = /[ㄱ-ㅎㅏ-ㅣ가-힣]|[^a-zA-Z0-9]/;
+        if (koreanOrSpecialCharRegex.test(value) || value.length < 5) {
+            alert("올바른 형식의 아이디를 입력해주세요.");
+            inputField.focus();
+            return;
+        }
+    }
+
+    // 추가 이메일 형식 검증 
+    if (type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            alert("올바른 이메일 형식을 입력해주세요.");
+            inputField.focus();
+            return;
+        }
+    }
+    
+    // 메시지 컨테이너를 찾아서 이전 메시지 제거
+    const messageContainer = inputField.closest('.input-wrapper').find('.message-container');
+    messageContainer.empty();
+
+    $.ajax({
+        url: 'checkDuplicate.do',
+        type: 'POST',
+        data: { column: column, value: value },
+        success: function (response) {
+            if (response.status === 'duplicate') {
+                inputField.attr('status', 'no');
+                messageContainer.html('<span style="color:red">이미 존재하는 ' + type + '입니다.</span>');
+            } else {
+                inputField.attr('status', 'yes');
+                messageContainer.html('<span style="color:green">사용 가능한 ' + type + '입니다.</span>');
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('서버 오류가 발생했습니다. 관리자에게 문의해주세요.');
+            console.error('Error:', error);
+        }
+    });
+}
+	$('#user_id')
+
+    $('#confirmPassword').on('input', function() {
+        const password = $('#user_pw').val();
+        const confirmPassword = $(this).val();
+        $(this).next('.error').remove(); // 기존 에러 메시지 제거
+        if (password !== confirmPassword) {
+            $(this).after('<span class="error" style="color:red">비밀번호가 일치하지 않습니다.</span>');
+        }
+    });
+    
+    function validateForm(form) {
+        let statusId = $('#user_id').attr('status');
+        if (!statusId) {
+            alert("아이디 중복체크를 해주세요.");
+            $('#user_id').focus();
+            return false;
+        } else if (statusId === "no") {
+            alert("다른 아이디를 입력해주세요.");
+            $('#user_id').focus();
+            return false;
         }
 
+        let statusEmail = $('#user_email').attr('status');
+        if (!statusEmail) {
+            alert("이메일 중복체크를 해주세요.");
+            $('#user_email').focus();
+            return false;
+        } else if (statusEmail === "no") {
+            alert("다른 이메일을 입력해주세요.");
+            $('#user_email').focus();
+            return false;
+        }
 
-    </script>
+        let statusNick = $('#user_nick').attr('status');
+        if (!statusNick) {
+            alert("닉네임 중복체크를 해주세요.");
+            $('#user_nick').focus();
+            return false;
+        } else if (statusNick === "no") {
+            alert("다른 닉네임을 입력해주세요.");
+            $('#user_nick').focus();
+            return false;
+        }
+        
+
+        if (form.user_pw.value !== form.confirmPassword.value) {
+            alert("비밀번호가 일치하지 않습니다.");
+            form.confirmPassword.focus();
+            return false;
+        }
+        
+        return true;
+    }
+</script>
+
 </body>
 </html>

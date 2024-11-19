@@ -12,7 +12,7 @@ import users.UserDAO;
 import users.UserDTO;
 
 @WebServlet("/user/register.do")
-public class RegisterServlet extends HttpServlet {
+public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -38,33 +38,7 @@ public class RegisterServlet extends HttpServlet {
 			userGender = null;
 		}
 		
-		//UserDAO 객체 생성
-		UserDAO dao = new UserDAO();
 		
-		//UserDAO의 checkIdDuplicate로 아이디 중복확인
-		boolean idExists = dao.checkIdDuplicate(userId);
-		if (idExists) {
-			req.setAttribute("RegisterErrMsg", userId+"는 이미 사용중인 아이디입니다. 다른 아이디를 입력하세요.");
-			req.getRequestDispatcher("RegisterForm.jsp").forward(req, resp);
-			return;
-		}
-		
-		//UserDAO의 checkEmailDuplicate로 이메일 중복확인
-		boolean emailExists = dao.checkEmailDuplicate(userEmail);
-		if (emailExists) {
-			req.setAttribute("RegisterErrMsg", userEmail+"는 이미 사용중인 이메일 입니다. 다른 이메일을 입력하세요.");
-			req.getRequestDispatcher("RegisterForm.jsp").forward(req, resp);
-			return;
-		}
-		
-		//UserDAO의 checkIdDuplicate로 닉네임 중복확인
-		boolean nicknameExists = dao.checkNicknameDuplicate(userNick);
-		if (nicknameExists) {
-			req.setAttribute("RegisterErrMsg", userNick+"는 이미 사용중인 닉네임 입니다. 다른 닉네임을 입력하세요.");
-			req.getRequestDispatcher("RegisterForm.jsp").forward(req, resp);
-			return;
-		}
-				
 				
 		//UserDTO 객체 생성 후 값 설정
 		UserDTO newUser = new UserDTO();
@@ -77,11 +51,9 @@ public class RegisterServlet extends HttpServlet {
 		newUser.setGender(userGender);
 		
 		//UserDAO의 registerUser 메서드 호출, DB에 insert
+		UserDAO dao = new UserDAO();
 		int result = dao.registerUser(newUser);
 		dao.close();
-		
-		
-		
 		
 		
 		//회원가입 성공 여부에 따른 처리
