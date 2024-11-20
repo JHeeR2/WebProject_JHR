@@ -7,6 +7,7 @@ public class MultiBoardDAO extends DBConnPool {
 		super();
 	}
 	
+	//검색 조건에 맞는 게시물 개수 반환
 	public int insertMultiBoard(MultiBoardDTO dto) {
 		int applyResult = 0;
 		try {

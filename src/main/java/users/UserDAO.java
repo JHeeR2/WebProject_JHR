@@ -51,7 +51,7 @@ public class UserDAO extends DBConnPool {
 	}
 	
 	//로그인 기능
-	public UserDTO getUser(String uid, String upass) {
+	public UserDTO UserLogin(String uid, String upass) {
 		UserDTO dto = null;
 		String query = "SELECT * FROM users where id = ? and pass = ? ";
 		
@@ -73,6 +73,34 @@ public class UserDAO extends DBConnPool {
 		}
 		return dto;
 	}
+	
+	//유저 정보 불러오기
+	public UserDTO getUserInfo(String userId) {
+		UserDTO userInfo = null;
+		String query = "SELECT id, name, email, nickname, birthday, gender, regidate FROM users where id = ? ";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, userId);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				userInfo = new UserDTO();
+				userInfo.setId(rs.getString("id"));
+				userInfo.setName(rs.getString("name"));
+				userInfo.setEmail("email");
+				userInfo.setNickname(rs.getString("nickname"));
+				userInfo.setBirthday(rs.getString("birthday"));
+				userInfo.setGender(rs.getString("gender"));
+				userInfo.setRegidate(rs.getDate("regidate"));
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return userInfo;
+	}
+	
+
 	
 	@Override
 	public void close() {

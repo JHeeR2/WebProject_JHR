@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우주 게시판</title>
-    <link rel="stylesheet" href="css/board-style.css">
-    <link rel="stylesheet" href="css/navigation-style.css">
+<meta charset="UTF-8">
+<title>자유게시판 목록</title>
+    <link rel="stylesheet" href="../css/board-style.css">
+    <link rel="stylesheet" href="../css/navigation-style.css">
 </head>
 <body>
 	<jsp:include page="/Common/Link.jsp"/>
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
-        <h1>우주 게시판</h1>
+        <h1>자유게시판</h1>
         <div class="search-container">
-            <input type="text" placeholder="검색..." aria-label="게시물 검색">
+            <input type="text" placeholder="검색어를 입력하세요" aria-label="게시물 검색">
             <button>검색</button>
         </div>
         <table>
@@ -53,8 +52,8 @@
                 </tr>
             </tbody>
         </table>
-        <a href="#" class="new-post">새 게시물 작성</a>
+        <a href="FreeboardWrite.jsp" class="new-post">새 게시물 작성</a>
     </div>
-    <script src="stars.js"></script>
+    <script src="../js/stars.js"></script>
 </body>
 </html>

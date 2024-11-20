@@ -22,7 +22,7 @@ public class LoginController extends HttpServlet {
 		
 		UserDAO dao = new UserDAO();
 		
-		UserDTO user = dao.getUser(userId, userPw);
+		UserDTO user = dao.UserLogin(userId, userPw);
 		
 		dao.close();
 		
