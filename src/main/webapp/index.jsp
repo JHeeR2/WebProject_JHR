@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우주 게시판</title>
     <link rel="stylesheet" href="css/board-style.css">
+    <link rel="stylesheet" href="css/navigation-style.css">
 </head>
 <body>
+	<jsp:include page="/Common/Link.jsp"/>
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">

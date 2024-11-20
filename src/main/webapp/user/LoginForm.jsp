@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 페이지</title>
     <link rel="stylesheet" href="../css/space-theme.css">
+    <link rel="stylesheet" href="../css/navigation-style.css">
     <script src="../js/stars.js"></script>
 </head>
 <body>
+	<jsp:include page="../Common/Link.jsp"/>
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">

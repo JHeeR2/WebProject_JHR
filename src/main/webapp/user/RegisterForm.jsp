@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <link rel="stylesheet" href="../css/space-theme.css">
+    <link rel="stylesheet" href="../css/navigation-style.css">
     <script src="../js/stars.js"></script>
     <style>
         .container {
@@ -88,6 +89,7 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../Common/Link.jsp"/>
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
@@ -193,7 +195,7 @@ $(document).ready(function () {
             messageContainer.html('<span style="color: red;">아이디는 최소 5자 이상이어야 합니다.</span>');
             $('#IdCheckButton').prop('disabled', true); // 버튼 비활성화
         } else {
-            messageContainer.html('<span style="color: red;">사용 가능한 형식의 아이디이나, 중복확인이 되지 않았습니다.</span>');
+            messageContainer.html('<span style="color: red;">아이디 중복확인을 클릭해주세요</span>');
             $('#IdCheckButton').prop('disabled', false); // 버튼 활성화
         }
     });
@@ -215,7 +217,7 @@ $(document).ready(function () {
             messageContainer.html('<span style="color: red;">이메일 형식이 올바르지 않습니다.</span>');
             $('#EmailCheckButton').prop('disabled', true); // 버튼 비활성화
         } else {
-            messageContainer.html('<span style="color: red;">사용 가능한 형식의 이메일이나, 중복확인이 되지 않았습니다.</span>');
+            messageContainer.html('<span style="color: red;">이메일 중복확인을 클릭해주세요</span>');
             $('#EmailCheckButton').prop('disabled', false); // 버튼 활성화
         }
     });
@@ -241,6 +243,7 @@ $(document).ready(function () {
             $('#NickCheckButton').prop('disabled', true); // 버튼 비활성화
         } else {
             messageContainer.empty(); // 메시지 초기화
+            messageContainer.html('<span style="color: red;">닉네임 중복확인을 클릭해주세요</span>');
             $('#NickCheckButton').prop('disabled', false); // 버튼 활성화
         }
     });
@@ -301,10 +304,22 @@ function checkDuplicate(type) {
         success: function (response) {
             if (response.status === 'duplicate') {
                 inputField.attr('status', 'no');
-                messageContainer.html('<span style="color:red">이미 존재하는 ' + type + '입니다.</span>');
+                if (type === 'id'){
+                messageContainer.html('<span style="color:red">이미 존재하는 아이디입니다.</span>');
+                }else if(type === 'email'){
+                messageContainer.html('<span style="color:red">이미 존재하는 이메일입니다.</span>');
+                }else if(type === 'nick'){
+                messageContainer.html('<span style="color:red">이미 존재하는 닉네임입니다.</span>');
+                }
             } else {
                 inputField.attr('status', 'yes');
-                messageContainer.html('<span style="color:green">사용 가능한 ' + type + '입니다.</span>');
+                if (type === 'id'){
+                messageContainer.html('<span style="color:green">사용 가능한 아이디입니다.</span>');
+                }else if(type === 'email'){
+                messageContainer.html('<span style="color:green">사용 가능한 이메일입니다.</span>');
+                }else if(type === 'nick'){
+                	messageContainer.html('<span style="color:green">사용 가능한 닉네임입니다.</span>');
+                }
             }
         },
         error: function (xhr, status, error) {
@@ -321,6 +336,8 @@ function checkDuplicate(type) {
         $(this).next('.error').remove(); // 기존 에러 메시지 제거
         if (password !== confirmPassword) {
             $(this).after('<span class="error" style="color:red">비밀번호가 일치하지 않습니다.</span>');
+        }else if (password === confirmPassword){
+        	$(this).after('<span class="error" style="color:green">비밀번호가 일치합니다.</span>');
         }
     });
     

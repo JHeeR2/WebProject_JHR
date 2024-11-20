@@ -28,8 +28,8 @@ public class LoginController extends HttpServlet {
 		
 		if(user != null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("UserId", user.getId());
-			session.setAttribute("UserNick", user.getNickname());
+			session.setAttribute("user_id", user.getId());
+			session.setAttribute("user_nick", user.getNickname());
 			resp.sendRedirect("LoginSuccess.jsp");
 			
 		} else {

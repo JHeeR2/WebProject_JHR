@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 
-session.removeAttribute("UserId");
-session.removeAttribute("UserNick");
+session.removeAttribute("user_id");
+session.removeAttribute("user_nick");
 
 response.sendRedirect("LoginForm.jsp");
 %>
