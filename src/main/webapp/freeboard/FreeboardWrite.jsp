@@ -15,7 +15,7 @@
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
         <h2>자유 게시판 글쓰기</h2>
-        <form name="writeFrm" method="post" enctype="multipart/form-data" action="../multiboard/write.do" onsubmit="return validateForm(this);">
+        <form name="writeFrm" method="post" action="../freeboard/write.do" onsubmit="return validateForm(this);">
         <div class="button-group">
         	<button type="reset" class="button">모두 지우기</button>
         	<button type="button" class="button" onclick="location.href='FreeboardList.jsp'">목록 바로가기</button>

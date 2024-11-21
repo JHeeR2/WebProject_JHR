@@ -8,6 +8,72 @@
     --space-accent: #00b0ff;
 }
 
+/* ... (previous styles remain unchanged) ... */
+
+/* Updated styles for the search form */
+.search-form {
+    margin-bottom: 20px;
+}
+
+.search-form table {
+    width: 100%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.search-form td {
+    padding: 10px; /* Reduced padding to make the form smaller */
+    text-align: center;
+}
+
+.search-form select,
+.search-form input[type="text"],
+.search-form input[type="submit"] {
+    font-family: 'Orbitron', sans-serif;
+    padding: 8px; /* Reduced padding to make the form elements smaller */
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--space-white);
+    margin: 0 5px;
+}
+
+.search-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 10px);
+    background-position-y: 50%;
+    padding-right: 30px;
+}
+
+/* New styles for option elements */
+.search-form select option {
+    background-color: var(--space-blue);
+    color: var(--space-white);
+}
+
+.search-form input[type="text"] {
+    width: 50%;
+}
+
+.search-form input[type="submit"] {
+    background-color: var(--space-accent);
+    color: var(--space-black);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: var(--space-white);
+    color: var(--space-accent);
+}
+
+/* ... (rest of the styles remain unchanged) ... */
+
 body {
     font-family: 'Orbitron', sans-serif;
     background-color: var(--space-black);

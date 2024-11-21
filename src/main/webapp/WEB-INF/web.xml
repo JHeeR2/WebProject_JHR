@@ -10,6 +10,17 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
 
-
+<!-- 게시판 페이징 처리를 위한 설정값 -->
+  <!-- 한 페이지 당 출력할 게시물의 갯수 -->
+  <context-param>
+  	<param-name>POSTS_PER_PAGE</param-name>
+  	<param-value>10</param-value>
+  </context-param>
+  <!-- 한 블럭 당 출력할 페이지의 갯수 -->
+    <context-param>
+  	<param-name>PAGES_PER_BLOCK</param-name>
+  	<param-value>5</param-value>
+  </context-param>
+  
 	
 </web-app>

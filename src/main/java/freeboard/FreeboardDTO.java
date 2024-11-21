@@ -1,16 +1,14 @@
-package multiboard;
+package freeboard;
 
-public class MultiBoardDTO {
+public class FreeboardDTO {
 	private String idx;
 	private String user_id;
-	private String nickname;
 	private String title;
 	private String content;
 	private String postdate;
-	private String ofile;
-	private String sfile;
-	private int downcount;
 	private int visitcount;
+	private String user_nick;
+	
 	public String getIdx() {
 		return idx;
 	}
@@ -22,12 +20,6 @@ public class MultiBoardDTO {
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 	public String getTitle() {
 		return title;
@@ -47,30 +39,19 @@ public class MultiBoardDTO {
 	public void setPostdate(String postdate) {
 		this.postdate = postdate;
 	}
-	public String getOfile() {
-		return ofile;
-	}
-	public void setOfile(String ofile) {
-		this.ofile = ofile;
-	}
-	public String getSfile() {
-		return sfile;
-	}
-	public void setSfile(String sfile) {
-		this.sfile = sfile;
-	}
-	public int getDowncount() {
-		return downcount;
-	}
-	public void setDowncount(int downcount) {
-		this.downcount = downcount;
-	}
 	public int getVisitcount() {
 		return visitcount;
 	}
 	public void setVisitcount(int visitcount) {
 		this.visitcount = visitcount;
 	}
+	public String getUser_nick() {
+		return user_nick;
+	}
+	public void setUser_nick(String user_nick) {
+		this.user_nick = user_nick;
+	}
+	
 	
 	
 	
