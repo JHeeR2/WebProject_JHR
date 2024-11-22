@@ -19,7 +19,7 @@
         <span style="color:red;">
         	<%= request.getAttribute("LoginErrMsg")==null? "" : request.getAttribute("LoginErrMsg") %>
        	</span>
-        <form name="loginForm" method="post" action="login.do" onsubmit="return validateForm(this);">
+        <form name="loginForm" method="post" action="LoginForm.do" onsubmit="return validateForm(this);">
             <div class="form-group">
                 <label for="userid">아이디</label>
                 <input type="text" id="user_id" name="user_id" placeholder="아이디를 입력해주세요" required>

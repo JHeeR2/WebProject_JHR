@@ -8,6 +8,22 @@
     --space-accent: #00b0ff;
 }
 
+/* 링크 스타일 추가 */
+a {
+    color: var(--space-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:visited {
+    color: var(--space-white);
+}
+
+a:hover {
+    color: var(--space-white);
+    text-decoration: underline;
+}
+
 /* ... (previous styles remain unchanged) ... */
 
 /* Updated styles for the search form */

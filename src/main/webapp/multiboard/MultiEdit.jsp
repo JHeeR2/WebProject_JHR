@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,22 +16,26 @@
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
         <h2>자료실 게시판 글쓰기</h2>
-        <form name="writeFrm" method="post" enctype="multipart/form-data" action="../multiboard/MultiWrite.do" onsubmit="return validateForm(this);">
+        <form name="writeFrm" method="post" enctype="multipart/form-data" action="../multiboard/MultiEdit.do" onsubmit="return validateForm(this);">
+       	<input type="hidden" name="idx" value="${ dto.idx }" />
+       	<input type="hidden" name="id" value="${ dto.user_id }">
+       	<input type="hidden" name="prevOfile" value="${ dto.ofile }" />
+       	<input type="hidden" name="prevSfile" value="${ dto.sfile }" />
         <div class="button-group">
         	<button type="reset" class="button">모두 지우기</button>
         	<button type="button" class="button" onclick="location.href='MultiList.do'">목록 바로가기</button>
         </div>
             <div class="form-group">
                 <label for="title">제목</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title"  value="${ dto.title }" required>
             </div>
             <div class="form-group">
                 <label for="content">내용</label>
-                <textarea id="content" name="content" required></textarea>
+                <textarea id="content" name="content" required>${ dto.content }</textarea>
             </div>
             <div class="form-group">
                 <label for="ofile">첨부 파일</label>
-                <input type="file" id="ofile" name="ofile">
+                <input type="file" id="ofile" name="ofile" value=${ dto.ofile }>
             </div>
                 <button type="submit" class="button">작성 완료</button>
         </form>

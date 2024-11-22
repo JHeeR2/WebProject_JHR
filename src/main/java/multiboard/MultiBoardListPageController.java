@@ -13,31 +13,33 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.BoardPage;
 
-@WebServlet("/multiboard/MultiList.do")
-public class MultiBoardListController extends HttpServlet {
+@WebServlet("/multiboard/listPage.do")
+public class MultiBoardListPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//DAO 생성
-		MultiBoardDAO dao = new MultiBoardDAO();
-		
-		//뷰에 절달할 매개변수 저장용 맵 생성
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		//검색을 위해 검색어를 입력했다면 파라미터로 전달될 값을 Map에 저장
+		// DAO 생성
+				MultiBoardDAO dao = new MultiBoardDAO();
+				
+				//뷰에 전달할 매개변수 저장용 맵 생성
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				//검색어가 있는 경우 파라미터를 받아서 Map에 추가 
 				String searchField = req.getParameter("searchField");
 				String searchWord = req.getParameter("searchWord");
 				if (searchWord != null) {
-					//검색어가 있는 경우 Map에 파라미터를 저장한다.
 					map.put("searchField", searchField);
 					map.put("searchWord", searchWord);
 				}
-				//게시물의 갯수 카운트를 위한 메서드 호출
+				//게시물의 갯수 카운트. 검색어가 있는 경우 like절 동적 추가됨
 				int totalCount = dao.selectCount(map);
 				
-				/*페이지 처리 start*/
+				/* 페이지 처리 start */
+				//application 내장객체를 얻어 옴
 				ServletContext application = getServletContext();
+				//web.xml에서 컨텍스트 초기화 파라미터를 읽어옴
+				//읽어온 값은 String 이므로 연산을 위해 int 형으로 변환한다.
 				int pageSize = Integer.parseInt(application.getInitParameter("POSTS_PER_PAGE"));
 				int blockPage = Integer.parseInt(application.getInitParameter("PAGES_PER_BLOCK"));
 				
@@ -74,6 +76,6 @@ public class MultiBoardListController extends HttpServlet {
 				req.setAttribute("boardLists", boardLists);
 				req.setAttribute("map", map);
 				req.getRequestDispatcher("/multiboard/MultiList.jsp").forward(req, resp);
-		
 	}
+
 }

@@ -11,9 +11,14 @@ import jakarta.servlet.http.HttpSession;
 import users.UserDAO;
 import users.UserDTO;
 
-@WebServlet("/user/login.do")
+@WebServlet("/user/LoginForm.do")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("LoginForm.jsp").forward(req, resp);
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

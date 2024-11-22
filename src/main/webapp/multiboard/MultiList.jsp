@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <title>자료실 게시판 목록</title>
     <link rel="stylesheet" href="../css/board-style.css">
     <link rel="stylesheet" href="../css/navigation-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 </head>
 <body>
 	<jsp:include page="/Common/Link.jsp"/>
@@ -63,41 +65,52 @@
                     <td>${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }</td>
                     <!--  제목 -->
                     <td>
-                    	<a href="../multiboard/view.do?idx=${ row.idx }">${ row.title }</a>
+                    	<a href="../multiboard/MultiView.do?idx=${ row.idx }">${ row.title }</a>
                     </td>
                     <!-- 작성자 -->
                     <td>${ row.nickname }</td>
                     <!-- 조회수 -->
                     <td>${ row.visitcount }</td>
                     <!-- 작성일 -->
-                    <td>${ row.postdate }</td>
+                    <td>
+                    <fmt:parseDate value = "${ row.postdate }" var="postdateValue" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    <fmt:formatDate value="${ postdateValue }" pattern="yy-MM-dd"/>
+                    </td>
                     <!-- 첨부파일 -->
                     <td>
-                    <c:if test="${ not empty row.ofile }">
-                    	<a href="../multiboard/download.do?ofile=${ row.ofile }&sfile=${ row.sfile }&idx={row.idx}">[Down]</a>
-                    </c:if>
+                    <c:choose>
+                    	<c:when test="${ not empty row.ofile }">
+                    	<a style="text-decoration:none; color: white" href="../multiboard/MultiView.do?idx=${ row.idx }">
+                    		<i class="fa-solid fa-file"></i>
+                    	</a>
+                    	</c:when>
+                    	<c:otherwise>
+                    	-
+                    	</c:otherwise>
+                    </c:choose>
                     </td>
                 </tr>
             </tbody>
 		</c:forEach>
 	</c:otherwise>
 </c:choose>
-</table>
-        <!-- 링크 수정하기 -->
-        <!-- 하단 메뉴 -->
-        <table>
-        	<tr align="center">
+			<!-- 링크 수정하기-->
+        	<!-- 하단 메뉴 -->
+			<tr align="center">
         		<td>
-        			<div class="pagination" align="center">
+        		</td>
+        		<td colspan="4">
+        			<div class="pagination">
         				${ map.pagingImg }
         			</div>
         		</td>
-        		<td>
+        		<td colspan="2">
+        		<a href="../multiboard/MultiList.do" class="new-post">목록보기</a>
         		<a href="../multiboard/MultiWrite.do" class="new-post">글쓰기</a>
         		</td>
         	</tr>
-        </table>	
-    </div>
+</table>
+    </div> 
     <script src="../js/stars.js"></script>
 </body>
 </html>

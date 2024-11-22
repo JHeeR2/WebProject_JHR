@@ -63,7 +63,6 @@
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
-    	<% if (session.getAttribute("user_id") != null) {%>	
         <h2>마이페이지</h2>
         <p style="font-size: 0.8em; color: var(--space-accent);">
         </p>
@@ -109,15 +108,9 @@
                 </tr>
             </table>
             <div class="update-link">
-                <a href="UserInfoEdit.jsp">내 정보 수정하기</a>
+                <a href="UserInfoPass.do">내 정보 수정하기</a>
             </div>
     </div>
-    <% } else { %>
-    <h2>마이페이지를 볼 권한이 없습니다</h2>
-    <div class="login-link">
-    	<a href="LoginForm.jsp">로그인 하러가기</a>
-    </div>
-    <% } %>
     
 </body>
 </html>

@@ -100,6 +100,29 @@ public class UserDAO extends DBConnPool {
 		return userInfo;
 	}
 	
+	public boolean confirmPassword(String id, String pass) {
+		boolean isCorr = true;
+		String sql= "SELECT COUNT(*) from users where id=? and pass= ?";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setString(2, pass);
+			rs = psmt.executeQuery();
+			rs.next();
+			if (rs.getInt(1) == 0) {
+				isCorr = false;
+			}
+			
+		} catch (Exception e) {
+			isCorr = false;
+			e.printStackTrace();
+		}
+		
+		return isCorr;
+		
+	}
+	
+	
 
 	
 	@Override
