@@ -1,4 +1,4 @@
-package freeboard;
+package qna;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import utils.JSFunction;
 
-@WebServlet("/freeboard/FreeboardDelete.do")
-public class FreeboardDeleteController extends HttpServlet {
+@WebServlet("/qna/delete.do")
+public class QuestionDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
@@ -26,8 +26,8 @@ public class FreeboardDeleteController extends HttpServlet {
 		
 		//게시물 얻어오기 : 열람에서 사용한 메서드를 그대로 사용한다.
 		String idx = req.getParameter("idx");
-		FreeboardDAO dao = new FreeboardDAO();
-		FreeboardDTO dto = dao.selectView(idx);
+		QuestionDAO dao = new QuestionDAO();
+		QuestionDTO dto = dao.selectView(idx);
 		
 		/*작성자 본인 확인 : DTO에 저장된 아이디와 Session 영역에 저장된 아이디를
 		비교하여 본인이 아니라면 경고창을 띄운다. */
@@ -42,7 +42,7 @@ public class FreeboardDeleteController extends HttpServlet {
 		dao.close();
 		
 		//삭제가 완료되면 목록으로 이동한다. 
-		JSFunction.alertLocation(resp, "삭제되었습니다.", "../freeboard/FreeboardList.do");
+		JSFunction.alertLocation(resp, "삭제되었습니다.", "../qna/QList.do");
 		
 		}
 

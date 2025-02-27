@@ -1,4 +1,4 @@
-package freeboard;
+package qna;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,16 +11,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import utils.FboardPage;
+import utils.QboardPage;
 
-
-@WebServlet("/freeboard/listPage.do")
-public class FreeboardListPageController extends HttpServlet{
+@WebServlet("/qna/listPage.do")
+public class QuestionListPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// DAO 생성
-		FreeboardDAO dao = new FreeboardDAO();
+		QuestionDAO dao = new QuestionDAO();
 		
 		//뷰에 전달할 매개변수 저장용 맵 생성
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -61,12 +60,12 @@ public class FreeboardListPageController extends HttpServlet{
 		/* 페이지 처리 end */
 		
 		//DAO의 메서드를 호출하여 목록에 출력할 게시물을 얻어온다. 
-		List<FreeboardDTO> boardLists = dao.selectListPage(map);
+		List<QuestionDTO> boardLists = dao.selectListPage(map);
 		dao.close();
 		
 		//뷰에 전달할 매개변수 추가
 		//목록 하단에 출력할 페이지 바로가기 링크를 얻어온 후 Map에 추가
-		String pagingImg = FboardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../freeboard/listPage.do");
+		String pagingImg = QboardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../qna/listPage.do");
 		map.put("pagingImg", pagingImg);
 		map.put("totalCount", totalCount);
 		map.put("pageSize", pageSize);
@@ -75,7 +74,7 @@ public class FreeboardListPageController extends HttpServlet{
 		//전달할 데이터를 request 영역에 저장 후 View로 포워드
 		req.setAttribute("boardLists", boardLists);
 		req.setAttribute("map", map);
-		req.getRequestDispatcher("/freeboard/FreeboardList.jsp").forward(req, resp);
+		req.getRequestDispatcher("/qna/QList.jsp").forward(req, resp);
 	}
 
 }

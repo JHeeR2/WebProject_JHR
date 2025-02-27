@@ -101,20 +101,13 @@
             <span class="required-asterisk">아이디와 이름은 수정할 수 없습니다. 관리자에게 문의하세요</span>
         </p>
         <form name="InfoEditForm" method="post" action="userInfoEdit.do" onsubmit="return validateForm(this);">
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
-            <input type="hid-den" name="prev_subj" value="${ oneDTO.subject }" readonly >
             <table>
                 <tr>
                     <td>아이디</td>
                     <td>
                     	<div class="input-wrapper">
             				<div class="input-group">
-                				<input type="text" id="user_id" name="user_id" placeholder="아이디" readonly>
+                				<input type="text" id="user_id" name="user_id" value="${ user.id }" readonly>
             				</div>
         				</div>
                     </td>
@@ -124,20 +117,11 @@
                     <td><input type="password" id="user_pw" name="user_pw" placeholder=" 새 비밀번호" required></td>
                 </tr>
                 <tr>
-                    <td>새 비밀번호 확인</td>
-                    <td><input type="password" id="confirmPassword" name="confirmPassword" placeholder="새 비밀번호 확인" required></td>
-                </tr>
-                <tr>
-                    <td>이름</td>
-                    <td><input type="text" id="name" name="user_name" placeholder="이름" readonly></td>
-                    
-                </tr>
-                <tr>
                     <td>이메일</td>
                     <td>
 						<div class="input-wrapper">
             				<div class="input-group">
-                				<input type="email" id="user_email" name="user_email" placeholder="이메일" required>
+                				<input type="email" id="user_email" name="user_email" value="${user.email}" required>
             				</div>
         				</div>
                     </td>
@@ -147,14 +131,14 @@
                     <td>
 						<div class="input-wrapper">
             				<div class="input-group">
-                				<input type="text" id="user_nick" name="user_nick" placeholder="닉네임" required>
+                				<input type="text" id="user_nick" name="user_nick" value="${user.nickname}" required>
             				</div>
         				</div>
                     </td>
                 </tr>
                 <tr>
                     <td>생일</td>
-                    <td><input type="date" id="birthday" name="user_birthday"></td>
+                    <td><input type="date" id="birthday" name="user_birthday" value="${user.birthday}"></td>
                 </tr>
                 <tr>
                     <td>성별</td>
@@ -172,110 +156,6 @@
             <button type="submit" class="button">회원정보 수정하기</button>
         </form>
     </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-
-//실시간 이메일 검증 코드
-$(document).ready(function () {
-    const userEmailInput = $('#user_email');
-
-    userEmailInput.on('input', function () {
-        const userEmail = $(this).val();
-        const messageContainer = $(this).closest('.input-wrapper').find('.message-container');
-        messageContainer.empty(); // 이전 메시지 제거
-
-        // 이메일 형식 검증 정규식
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailRegex.test(userEmail)) {
-            messageContainer.html('<span style="color: red;">이메일 형식이 올바르지 않습니다.</span>');
-            $('#EmailCheckButton').prop('disabled', true); // 버튼 비활성화
-        } else {
-            messageContainer.html('<span style="color: red;">이메일 중복확인을 클릭해주세요</span>');
-            $('#EmailCheckButton').prop('disabled', false); // 버튼 활성화
-        }
-    });
-});
-
-//실시간 닉네임 검증 코드
-$(document).ready(function () {
-    const userNickInput = $('#user_nick');
-
-    userNickInput.on('input', function () {
-        const userNick = $(this).val();
-        const messageContainer = $(this).closest('.input-wrapper').find('.message-container');
-        messageContainer.empty(); // 이전 메시지 제거
-
-        const nickRegex = /^[^<>'";\-#&/\\%=.:?~]+$/;
-
-        if (userNick.trim() === '') {
-            messageContainer.html('<span style="color: red;">닉네임을 입력해 주세요.</span>');
-            $('#NickCheckButton').prop('disabled', true); // 버튼 비활성화
-        }
-        else if (!nickRegex.test(userNick)) {
-            messageContainer.html('<span style="color: red;">허용되지 않은 특수문자가 사용되었습니다.</span>');
-            $('#NickCheckButton').prop('disabled', true); // 버튼 비활성화
-        } else {
-            messageContainer.empty(); // 메시지 초기화
-            messageContainer.html('<span style="color: red;">닉네임 중복확인을 클릭해주세요</span>');
-            $('#NickCheckButton').prop('disabled', false); // 버튼 활성화
-        }
-    });
-});
-
-
-function checkDuplicate(type) {
-    let value, inputField, column;
-
-    switch (type) {
-        case 'email':
-            value = $('#user_email').val();
-            inputField = $('#user_email');
-            column = "email";
-            break;
-        case 'nick':
-            value = $('#user_nick').val();
-            inputField = $('#user_nick');
-            column = "nickname";
-            break;
-        default:
-            return;
-    }
-
-    
-
-    // 추가 이메일 형식 검증 
-    if (type === 'email') {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) {
-            alert("올바른 이메일 형식을 입력해주세요.");
-            inputField.focus();
-            return;
-        }
-    }
-
-    $('#confirmPassword').on('input', function() {
-        const password = $('#user_pw').val();
-        const confirmPassword = $(this).val();
-        $(this).next('.error').remove(); // 기존 에러 메시지 제거
-        if (password !== confirmPassword) {
-            $(this).after('<span class="error" style="color:red">새 비밀번호가 일치하지 않습니다.</span>');
-        }else if (password === confirmPassword){
-        	$(this).after('<span class="error" style="color:green">새 비밀번호가 일치합니다.</span>');
-        }
-    });
-    
-    function validateForm(form) {
-        
-        if (form.user_pw.value !== form.confirmPassword.value) {
-            alert("비밀번호가 일치하지 않습니다.");
-            form.confirmPassword.focus();
-            return false;
-        }
-        
-        return true;
-    }
-</script>
 
 </body>
 </html>

@@ -122,6 +122,24 @@ public class UserDAO extends DBConnPool {
 		
 	}
 	
+	//회원정보 수정
+	public int updateUser(UserDTO user) {
+	    int result = 0;
+	    try {
+	        String query = "UPDATE users SET pass = ?, email = ?, nickname = ?, birthday = ?, gender = ? WHERE id = ?";
+	        psmt = con.prepareStatement(query);
+	        psmt.setString(1, user.getPass());
+	        psmt.setString(2, user.getEmail());
+	        psmt.setString(3, user.getNickname());
+	        psmt.setString(4, user.getBirthday());
+	        psmt.setString(5, user.getGender());
+	        psmt.setString(6, user.getId());
+	        result = psmt.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return result;
+	}
 	
 
 	

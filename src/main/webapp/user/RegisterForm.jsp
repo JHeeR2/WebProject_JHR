@@ -100,7 +100,7 @@
         <p style="font-size: 0.8em; color: var(--space-accent);">
             <span class="required-asterisk">*</span>는 필수 입력 항목입니다
         </p>
-        <form name="registerForm" method="post" action="register.do" onsubmit="return validateForm(this);">
+        <form name="registerForm" method="post" action="../user/RegisterForm.do" onsubmit="return validateForm(this);">
             <table>
                 <tr>
                     <td>아이디 <span class="required-asterisk">*</span></td>

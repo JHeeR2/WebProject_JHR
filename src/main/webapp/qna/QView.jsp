@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자유 게시판 - 글 보기</title>
+    <title>Q&A 게시판 - 글 보기</title>
     <link rel="stylesheet" href="../css/board-style.css">
     <link rel="stylesheet" href="../css/navigation-style.css">
 </head>
@@ -15,7 +15,7 @@
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
-        <h2>자유 게시판 - 글 보기</h2>
+        <h2>Q&A 게시판 - 글 보기</h2>
 
         <table> 
             <tr>
@@ -44,25 +44,25 @@
         <div style="text-align: center; margin-top: 20px;">
         	<!-- 글 작성자와 로그인 한 사람이 같을 때만 -->
         	<c:if test="${ user_id eq dto.user_id }">
-        	<button type="button" onclick="location.href='../freeboard/FreeboardEdit.do?idx=${ param.idx }';">
+        	<button type="button" onclick="location.href='../qna/QEdit.do?idx=${ param.idx }';">
                 수정하기
             </button>
             <button type="button" onclick="deleteConfirm(${ param.idx });">
 				삭제하기
 			</button>
             </c:if>
-            <button type="button" onclick="location.href='../freeboard/FreeboardList.do';">
+            <button type="button" onclick="location.href='../qna/QList.do';">
                 목록 바로가기
             </button>
 
         </div>
-    </div>
+		    </div>
     <script src="stars.js"></script>
     <script>
 	function deleteConfirm(idx){
 		let c = confirm("게시물을 삭제할까요?")
 		if(c==true){
-			location.href="../freeboard/FreeboardDelete.do?idx="+idx;
+			location.href="../qna/delete.do?idx="+idx;
 		}
 	}
 	</script>

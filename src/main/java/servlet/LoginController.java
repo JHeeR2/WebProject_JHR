@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("user_id", user.getId());
 			session.setAttribute("user_nick", user.getNickname());
-			resp.sendRedirect("LoginSuccess.jsp");
+			resp.sendRedirect("../freeboard/FreeboardList.do");
 			
 		} else {
 			req.setAttribute("LoginErrMsg", "아이디 또는 비밀번호를 확인해주세요");

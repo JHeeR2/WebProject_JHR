@@ -1,6 +1,6 @@
-package freeboard;
+package qna;
 
-public class FreeboardDTO {
+public class QuestionDTO {
 	private String idx;
 	private String user_id;
 	private String title;
@@ -52,11 +52,4 @@ public class FreeboardDTO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유 게시판 목록</title>
+<title>Q&A 게시판 목록</title>
     <link rel="stylesheet" href="../css/board-style.css">
     <link rel="stylesheet" href="../css/navigation-style.css">
 </head>
@@ -15,7 +15,7 @@
     <div class="space-background"></div>
     <div class="stars" aria-hidden="true"></div>
     <div class="container">
-        <h1>자유 게시판- 목록보기</h1>
+        <h1>Q&A 게시판- 목록보기</h1>
 		<!-- 검색 폼 -->
 		<form method="get" class="search-form">
 		<table>
@@ -63,7 +63,7 @@
                     <td>${ map.totalCount - (((map.pageNum-1) * map.pageSize) + loop.index) }</td>
                     <!--  제목 -->
                     <td>
-                    	<a href="../freeboard/FreeboardView.do?idx=${ row.idx }">${ row.title }</a>
+                    	<a href="../qna/QView.do?idx=${ row.idx }">${ row.title }</a>
                     </td>
                     <!-- 작성자 -->
                     <td>${ row.nickname }</td>
@@ -90,8 +90,8 @@
         			</div>
         		</td>
         		<td colspan="1">
-        		<a href="../freeboard/FreeboardList.do" class="new-post">목록보기</a>
-        		<a href="../freeboard/FreeboardWrite.do" class="new-post">글쓰기</a>
+        		<a href="../qna/QList.do" class="new-post">목록보기</a>
+        		<a href="../qna/QWrite.do" class="new-post">글쓰기</a>
         		</td>
         	</tr>
 </table>

@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 <% } %>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <li class="nav-item"><a href="../freeboard/FreeboardList.do" class="nav-link">자유게시판</a></li>
-<li class="nav-item"><a href="#" class="nav-link">Q&A게시판</a></li>
+<li class="nav-item"><a href="../qna/QList.do" class="nav-link">Q&A게시판</a></li>
 <li class="nav-item"><a href="../multiboard/MultiList.do" class="nav-link">자료실게시판</a></li>
 
 </ul>
